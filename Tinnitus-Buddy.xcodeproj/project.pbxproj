@@ -15,6 +15,8 @@
 		EBFCC8A325F012060045A47C /* TonePlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFCC89E25F012060045A47C /* TonePlayerViewModel.swift */; };
 		EBFCC8A425F012060045A47C /* SingleTonePlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFCC89F25F012060045A47C /* SingleTonePlayerNode.swift */; };
 		EBFCC8A525F012060045A47C /* AVACRNTonePlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFCC8A025F012060045A47C /* AVACRNTonePlayerNode.swift */; };
+		EBFCC8AC25F080370045A47C /* SelectBaseToneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFCC8AB25F080370045A47C /* SelectBaseToneView.swift */; };
+		EBFCC8AF25F080680045A47C /* PlayButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFCC8AE25F080680045A47C /* PlayButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		EBFCC89E25F012060045A47C /* TonePlayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TonePlayerViewModel.swift; sourceTree = "<group>"; };
 		EBFCC89F25F012060045A47C /* SingleTonePlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTonePlayerNode.swift; sourceTree = "<group>"; };
 		EBFCC8A025F012060045A47C /* AVACRNTonePlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVACRNTonePlayerNode.swift; sourceTree = "<group>"; };
+		EBFCC8AB25F080370045A47C /* SelectBaseToneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBaseToneView.swift; sourceTree = "<group>"; };
+		EBFCC8AE25F080680045A47C /* PlayButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,9 +70,11 @@
 				EBFCC89E25F012060045A47C /* TonePlayerViewModel.swift */,
 				EBFCC88C25F011DA0045A47C /* Tinnitus_BuddyApp.swift */,
 				EBFCC88E25F011DA0045A47C /* ContentView.swift */,
+				EBFCC8AE25F080680045A47C /* PlayButtonView.swift */,
 				EBFCC89025F011DA0045A47C /* Assets.xcassets */,
 				EBFCC89525F011DA0045A47C /* Info.plist */,
 				EBFCC89225F011DA0045A47C /* Preview Content */,
+				EBFCC8AB25F080370045A47C /* SelectBaseToneView.swift */,
 			);
 			path = "Tinnitus-Buddy";
 			sourceTree = "<group>";
@@ -154,6 +160,8 @@
 				EBFCC8A525F012060045A47C /* AVACRNTonePlayerNode.swift in Sources */,
 				EBFCC88F25F011DA0045A47C /* ContentView.swift in Sources */,
 				EBFCC8A325F012060045A47C /* TonePlayerViewModel.swift in Sources */,
+				EBFCC8AF25F080680045A47C /* PlayButtonView.swift in Sources */,
+				EBFCC8AC25F080370045A47C /* SelectBaseToneView.swift in Sources */,
 				EBFCC88D25F011DA0045A47C /* Tinnitus_BuddyApp.swift in Sources */,
 				EBFCC8A225F012060045A47C /* TonePlayer.swift in Sources */,
 			);

@@ -20,18 +20,17 @@ class SingleTonePlayerNode : AVAudioPlayerNode {
     var frequency: Double {
         set {
             _frequency = newValue
-            print("Set Freq: \(newValue)")
+            print("Set Base Freq: \(newValue)")
         }
         get {
-            print("Set Freq: \(_frequency)")
             return _frequency
         }
     }
     
-    override init() {
-        self._frequency = Double(1200) //Settings.sharedInstance.getTone())
+    init(withBaseTone:Double, audioFormat:AVAudioFormat) {
+        self._frequency = withBaseTone
+        self.audioFormat = audioFormat
         super.init()
-        audioFormat = AVAudioFormat(standardFormatWithSampleRate: sampleRate, channels: 1)
     }
     
     func prepareBuffer() -> AVAudioPCMBuffer {
@@ -56,6 +55,11 @@ class SingleTonePlayerNode : AVAudioPlayerNode {
         }
         buffer.frameLength = numberFrames
         self.theta = theta
+    }
+    
+    override func play() {
+        preparePlaying()
+        super.play()
     }
     
     func scheduleBuffer() {

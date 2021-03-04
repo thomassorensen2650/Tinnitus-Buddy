@@ -41,22 +41,41 @@ class TonePlayerViewModel : ObservableObject {
     }
     
     init() {
-        tonePayer = TonePlayer(sampleRate: sampleRate)
+        tonePayer = TonePlayer(withBaseTone: TonePlayerViewModel.getBaseFrequency(),sampleRate: sampleRate)
     }
 
     // MARK: - Intents
     func playOrStop() {
-        tonePayer.playOrStop()
+        if (tonePayer.isPlaying) {
+            tonePayer.stop()
+        }
+        else {
+            tonePayer.play()
+        }
         print("Play :\(tonePayer.isPlaying)")
         objectWillChange.send()
     }
     
+    func playOrStopBase() {
+        if (tonePayer.isPlaying) {
+            tonePayer.stopBase()
+        }
+        else {
+            tonePayer.playBase()
+        }
+        print("Play :\(tonePayer.isPlaying)")
+        objectWillChange.send()
+    }
+    
+    
     func changeBaseTone() {
+        tonePayer.stop()
         showFrequencyView = true
         objectWillChange.send()
     }
     
     func saveBaseTone(basetone: Double) {
+        tonePayer.stopBase()
         showFrequencyView = false
         objectWillChange.send()
     }

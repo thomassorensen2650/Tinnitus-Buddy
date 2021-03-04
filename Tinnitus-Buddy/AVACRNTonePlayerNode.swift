@@ -32,13 +32,6 @@ class AVACRNTonePlayerNode: AVAudioPlayerNode {
         InitializeToneSequence(withBaseTone: withBaseTone)
     }
     
-   /* init(withBaseTone:Double, sampleRate: Double) {
-        super.init()
-        self.audioFormat = AVAudioFormat(standardFormatWithSampleRate: sampleRate, channels: 1)
-        InitializeToneSequence(withBaseTone: withBaseTone)
-    }*/
-    
-    //
     private func prepareBuffer() -> AVAudioPCMBuffer {
         let buffer = AVAudioPCMBuffer(pcmFormat: audioFormat, frameCapacity: bufferCapacity)!
         fillBuffer(buffer)

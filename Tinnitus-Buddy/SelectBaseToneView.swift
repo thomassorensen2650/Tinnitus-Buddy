@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct SelectBaseToneView: View {
+    
+    let MinSelectableBaseFrequency = 1.0 // Min level the user can select for the base
+    let MaxSelectableBaseFrequency = 15_000.0 // Max level the user can select for the users
+    let SelectableBaseFrequencyStep = 0.2
+    
     @ObservedObject var viewModel: TonePlayerViewModel
     @State var baseFrequency : Double
     
@@ -39,7 +44,7 @@ struct SelectBaseToneView: View {
                             self.baseFrequency = newValue
                             self.viewModel.frequency = newValue
                        }
-                ), in: 1000...9000, step: 0.2)
+                ), in: MinSelectableBaseFrequency...MaxSelectableBaseFrequency, step: SelectableBaseFrequencyStep)
                 Image(systemName: "plus")
             }.padding()
             Text(String(format: "Current tone is at %.1f Hz", baseFrequency))

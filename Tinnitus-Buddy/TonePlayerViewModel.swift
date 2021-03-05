@@ -10,17 +10,19 @@ import SwiftUI
 class TonePlayerViewModel : ObservableObject {
     
     static let baseFrequencyKey = "baseFrequency"
-    
     let tonePayer: TonePlayer
     let sampleRate: Double = 44_100.0
+    static let defaultFrequency = 3000.0
     static func getBaseFrequency() -> Double {
             let defaults = UserDefaults.standard
             var baseFrequency = defaults.double(forKey: baseFrequencyKey)
             if baseFrequency == 0.0 {
-                baseFrequency = 3000.0 // Default
+                baseFrequency = defaultFrequency // Default
             }
             return baseFrequency
     }
+    
+    private(set) var showFrequencyView = false
     
     var frequency : Double {
         get {
@@ -33,15 +35,14 @@ class TonePlayerViewModel : ObservableObject {
             objectWillChange.send()
         }
     }
-    
-    private(set) var showFrequencyView = false
-    
+
     var isPlaying : Bool {
         tonePayer.isPlaying
     }
     
     init() {
-        tonePayer = TonePlayer(withBaseTone: TonePlayerViewModel.getBaseFrequency(),sampleRate: sampleRate)
+        tonePayer = TonePlayer(withBaseTone: TonePlayerViewModel.getBaseFrequency(),
+                               sampleRate: sampleRate)
     }
 
     // MARK: - Intents
@@ -52,7 +53,6 @@ class TonePlayerViewModel : ObservableObject {
         else {
             tonePayer.play()
         }
-        print("Play :\(tonePayer.isPlaying)")
         objectWillChange.send()
     }
     
@@ -63,7 +63,6 @@ class TonePlayerViewModel : ObservableObject {
         else {
             tonePayer.playBase()
         }
-        print("Play :\(tonePayer.isPlaying)")
         objectWillChange.send()
     }
     

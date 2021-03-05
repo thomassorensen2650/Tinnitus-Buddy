@@ -15,20 +15,10 @@ class SingleTonePlayerNode : AVAudioPlayerNode {
     
     private var theta: Double = 0.0
     private(set) var audioFormat: AVAudioFormat!
-    private var _frequency: Double
-    
-    var frequency: Double {
-        set {
-            _frequency = newValue
-            print("Set Base Freq: \(newValue)")
-        }
-        get {
-            return _frequency
-        }
-    }
+    var frequency: Double
     
     init(withBaseTone:Double, audioFormat:AVAudioFormat) {
-        self._frequency = withBaseTone
+        self.frequency = withBaseTone
         self.audioFormat = audioFormat
         super.init()
     }

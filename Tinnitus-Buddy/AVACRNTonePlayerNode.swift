@@ -9,8 +9,17 @@ import Foundation
 import AVFoundation
 
 class AVACRNTonePlayerNode: AVAudioPlayerNode {
+    // Mark - Constants
     let bufferCapacity: AVAudioFrameCount = 512 * 4
+    let NumberOfTimesToRepeatTones = 4
+    let NumberOfToneSequences = 20
+    let SilenceTimeBetweenTones = 0.01
+    let SilenceTimeBetweenSeqences = 1.4
+    let ToneLength = 0.15 // each tone is played for 0.15s
+    let useFixedTonePattern = false
   
+    
+    
     // Contains current Tone being Generated
     // When Empty, then tone should be pop'd from ToneList
     private var toneBuffer = [Float]()
@@ -71,10 +80,37 @@ class AVACRNTonePlayerNode: AVAudioPlayerNode {
         }
     }
     
-    func InitializeToneSequence(withBaseTone baseTone : Double) {
-        // FIXME: This tone sequence came from an online web-player.
-        // need to investigage if can we randomize this instead to make code cleaner? or if it needs to bed these specific patterns.
-        let tones = [baseTone - 900.0,baseTone - 400.0,baseTone + 400.0, baseTone + 1500.0]
+    func InitializeToneSequence(withBaseTone baseFreq : Double) {
+        if useFixedTonePattern {
+            // FIXME: This tone sequence came from the original post about the approach based on the official app
+            // The frequencies spans much wider, need to investigate.. maybe make an option to select???
+            generateFixedToneSequence(withBaseTone: baseFreq)
+        }
+        else {
+            // This is the approach from https://github.com/headphonejames/acrn-react
+            // Frequencies are much closer to baseTone. Which one is correct??
+            generateRandomToneSequence(withBaseTone: baseFreq)
+        }
+    }
+    
+    private func generateRandomToneSequence(withBaseTone baseFreq: Double) {
+        
+        var tones = [floor(baseFreq * 0.773 - 44.5), floor(baseFreq * 0.903 - 21.5),
+                     floor(baseFreq * 1.09 + 52), floor(baseFreq * 1.395 + 26.5)];
+        let silence = 0.0
+        toneList.removeAll()
+            
+        for _ in 0...NumberOfToneSequences {
+            for _ in 0...NumberOfTimesToRepeatTones {
+                tones.shuffle()
+                toneList.append(contentsOf: tones)
+            }
+            toneList.append(silence)
+        }
+    }
+    
+    private func generateFixedToneSequence(withBaseTone baseFreq: Double) {
+        let tones = [baseFreq - 900.0,baseFreq - 400.0,baseFreq + 400.0, baseFreq + 1500.0]
         let silence = 0.0
         
         toneList.removeAll()
@@ -146,13 +182,13 @@ class AVACRNTonePlayerNode: AVAudioPlayerNode {
         if (toneFreq == 0) { // Silence
             // After 12 tones we need to generate silent frames
             // We need to generate 1.4 seconds of Silence
-            let numberFrames = Int(audioFormat.sampleRate * 1.4)
+            let numberFrames = Int(audioFormat.sampleRate * SilenceTimeBetweenSeqences)
             for _ in 0..<Int(numberFrames) {
                 toneBuffer.append(Float(0))
             }
         } else {
             // Duration: 0.15 seconds
-            let numberFrames = Int(audioFormat.sampleRate * 0.15)
+            let numberFrames = Int(audioFormat.sampleRate * ToneLength)
           
             // How much tone change in tone wave value over each sample
             let theta_increment = 2.0 * .pi * toneFreq / audioFormat.sampleRate
@@ -178,7 +214,7 @@ class AVACRNTonePlayerNode: AVAudioPlayerNode {
             }
             
             // make 0.01 seconds silence after each tone
-            let numberOfSilenceFrames = Int(audioFormat.sampleRate * 0.01)
+            let numberOfSilenceFrames = Int(audioFormat.sampleRate * SilenceTimeBetweenTones)
             for _ in 0..<Int(numberOfSilenceFrames) {
                 toneBuffer.append(Float(0))
             }

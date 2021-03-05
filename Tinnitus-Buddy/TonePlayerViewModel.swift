@@ -67,7 +67,6 @@ class TonePlayerViewModel : ObservableObject {
         objectWillChange.send()
     }
     
-    
     func changeBaseTone() {
         tonePayer.stop()
         showFrequencyView = true
@@ -75,6 +74,7 @@ class TonePlayerViewModel : ObservableObject {
     }
     
     func saveBaseTone(basetone: Double) {
+        frequency = basetone
         tonePayer.stopBase()
         showFrequencyView = false
         objectWillChange.send()

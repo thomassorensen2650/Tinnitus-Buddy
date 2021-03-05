@@ -39,19 +39,18 @@ struct SelectBaseToneView: View {
                             self.baseFrequency = newValue
                             self.viewModel.frequency = newValue
                        }
-                   ), in: 1000...9000, step: 1)
+                ), in: 1000...9000, step: 0.2)
                 Image(systemName: "plus")
             }.padding()
-            Text(String(format: "Current tone is at %.0f Hz", baseFrequency))
+            Text(String(format: "Current tone is at %.1f Hz", baseFrequency))
             Spacer()
             
             PlayButtonView(isPlaying: viewModel.isPlaying,
                            frequency: viewModel.frequency).onTapGesture(perform : { viewModel.playOrStopBase() } )
         
             Button(action: {
-                    viewModel.frequency = baseFrequency
                     viewModel.saveBaseTone(basetone: baseFrequency)}) {
-                Label("All Done", systemImage: "checkmark")
+                        Label("All Done", systemImage: "checkmark")
             }
         }
     }

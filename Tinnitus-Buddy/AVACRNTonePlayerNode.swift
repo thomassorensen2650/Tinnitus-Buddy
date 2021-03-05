@@ -66,52 +66,66 @@ class AVACRNTonePlayerNode: AVAudioPlayerNode {
     }
     
     private func preparePlaying() {
-        scheduleBuffer()
-        scheduleBuffer()
-        scheduleBuffer()
-        scheduleBuffer()
+        for _ in 0..<3 {
+            scheduleBuffer()
+        }
     }
     
     func InitializeToneSequence(withBaseTone baseTone : Double) {
-        let tone1 = baseTone - 900.0
-        let tone2 = baseTone - 400.0
-        let tone3 = baseTone + 400.0
-        let tone4 = baseTone + 1500.0
+        // FIXME: This tone sequence came from an online web-player.
+        // need to investigage if can we randomize this instead to make code cleaner? or if it needs to bed these specific patterns.
+        let tones = [baseTone - 900.0,baseTone - 400.0,baseTone + 400.0, baseTone + 1500.0]
         let silence = 0.0
         
         toneList.removeAll()
         
-        //            1-     2-     3-     4-     4-     2 -    1-     3 -    4-     3-     2-     1
-        let seq1 = [tone1, tone2, tone3, tone4, tone4, tone2, tone1, tone3, tone4, tone3, tone2, tone1, silence]
-        toneList.append(contentsOf: seq1)
+        // Sequence 2
+        for n in [1,2,3,4,4,2,1,3,4,3,2,1] {
+            toneList.append(tones[n-1])
+        }
+        toneList.append(silence)
         
-        //            2-      4-    1-     3     -4-     2-     1-     3-    4-     3-      2-    1
-        let seq2 = [tone2, tone4, tone1, tone3, tone4, tone2, tone1, tone3, tone4, tone3, tone2, tone1, silence]
-        toneList.append(contentsOf: seq2)
+        // Sequence 3
+        for n in [2,4,1,3,4,2,1,3,4,3,2,1] {
+            toneList.append(tones[n-1])
+        }
+        toneList.append(silence)
+    
+        // Sequence 3
+        for n in [3,2,4,1,4,2,1,3,1,4,2,2] {
+            toneList.append(tones[n-1])
+        }
+        toneList.append(silence)
         
-        //            3-     2-     4-     1-     4-     2-     1-     3-     1-     4-     2-     2
-        let seq3 = [tone3, tone2, tone4, tone1, tone4, tone2, tone1, tone3, tone1, tone4, tone2, tone2, silence]
-        toneList.append(contentsOf: seq3)
+        // Sequence 4
+        for n in [2,3,4,1,1,2,4,3,4,3,2,1] {
+            toneList.append(tones[n-1])
+        }
+        toneList.append(silence)
         
-        //             2-     3-     4-    1-     1-     2-     4-     3-     4-     3-     2-     1
-        let seq4 = [tone2, tone3, tone4, tone1, tone1, tone2, tone4, tone3, tone4, tone3, tone2, tone1, silence]
-        toneList.append(contentsOf: seq4)
+        // Sequence 5
+        for n in [1,3,2,4,4,2,3,1,4,1,3,2] {
+            toneList.append(tones[n-1])
+        }
+        toneList.append(silence)
         
-        //           1-      3-     2-     4-     4-     2-     3-     1-     4-     1-    3-      2
-        let seq5 = [tone1, tone3, tone2, tone4, tone4, tone2, tone3, tone1, tone4, tone1, tone3, tone2, silence]
-        toneList.append(contentsOf: seq5)
+        // Sequence 6
+        for n in [2,3,4,1,4,1,3,2,2,4,3,1] {
+            toneList.append(tones[n-1])
+        }
+        toneList.append(silence)
         
-        //           2-      3-     4-     1-     4-     1-     3-     2-     2-     4-     3-     1
-        let seq6 = [tone2, tone3, tone4, tone1, tone4, tone1, tone3, tone2, tone2, tone4, tone3, tone1, silence]
-        toneList.append(contentsOf: seq6)
-        
-        //           2-      3-     4-     1-     3-     1-     2-     4-     1-     2-     4-     3
-        let seq7 = [tone2, tone3, tone4, tone1, tone3, tone1, tone2, tone4, tone1, tone2, tone4, tone3, silence]
-        toneList.append(contentsOf: seq7)
-        
-        //            1-      2-     4-    3-     4-     3-     1-     2-     1-     4-    2 -      3
-        let seq8 = [tone1, tone2, tone4, tone3, tone4, tone3, tone1, tone2, tone1, tone4, tone2, tone3, silence]
-        toneList.append(contentsOf: seq8)
+        // Sequence 7
+        for n in [2,3,4,1,3,1,2,4,1,2,4,3] {
+            toneList.append(tones[n-1])
+        }
+        toneList.append(silence)
+
+        // Sequence 8
+        for n in [1,2,4,3,4,3,1,2,1,4] {
+            toneList.append(tones[n-1])
+        }
+        toneList.append(silence)
     }
     
     func LoadNextToneIntoBuffer() {

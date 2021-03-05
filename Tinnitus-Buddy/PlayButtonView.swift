@@ -12,21 +12,14 @@ struct PlayButtonView: View  {
     var frequency: Double
     var body: some View {
         VStack() {
-        if (isPlaying) {
-         
-            Image(systemName: "stop")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: UIScreen.main.bounds.width / 2,
-                       height: UIScreen.main.bounds.width / 2)
-        }else {
-            Image(systemName: "play")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: UIScreen.main.bounds.width / 2,
-                       height: UIScreen.main.bounds.width / 2)
-        }
-           // Spacer()
+            if (isPlaying) {
+                Image(systemName: "stop").resizable()
+            }else {
+                Image(systemName: "play").resizable()
+            }
         }.padding()
+         .frame(width: UIScreen.main.bounds.width / 2,
+                height: UIScreen.main.bounds.width / 2)
+        .aspectRatio(contentMode: .fit)
     }
 }

@@ -72,9 +72,8 @@ class SingleTonePlayerNode : AVAudioPlayerNode {
     }
     
     func preparePlaying() {
-        scheduleBuffer()
-        scheduleBuffer()
-        scheduleBuffer()
-        scheduleBuffer()
+        for _ in 0..<3 {
+            scheduleBuffer()
+        }
     }
 }

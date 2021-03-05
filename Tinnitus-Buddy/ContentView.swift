@@ -27,7 +27,9 @@ struct MainToneView: View {
         NavigationView {
             VStack {
                 Text(String(format: "Modulating around %.0f Hz", viewModel.frequency))
-                PlayButtonView(isPlaying: viewModel.isPlaying, frequency: viewModel.frequency).onTapGesture(perform : { viewModel.playOrStop() } ) .toolbar {
+                PlayButtonView(isPlaying: viewModel.isPlaying,
+                               frequency: viewModel.frequency).onTapGesture(perform : { viewModel.playOrStop() } )
+                    .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         Menu {
                             Button(action: { viewModel.changeBaseTone()}) {

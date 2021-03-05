@@ -24,8 +24,7 @@ class TonePlayer {
     
     init(withBaseTone:Double, sampleRate : Double) {
         audioFormat = AVAudioFormat(standardFormatWithSampleRate: sampleRate, channels: 1)
-        baseTone = SingleTonePlayerNode(withBaseTone: withBaseTone,
-                                        audioFormat: audioFormat)
+        baseTone = SingleTonePlayerNode(withBaseTone: withBaseTone, audioFormat: audioFormat)
         tone = AVACRNTonePlayerNode(withBaseTone: withBaseTone, audioFormat: audioFormat)
         
         engine.attach(tone)
